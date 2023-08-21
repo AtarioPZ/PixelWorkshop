@@ -1,24 +1,39 @@
-import logo from './logo.svg';
+// App.js
+import React from 'react';
 import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Header from './components/common/header';
+import Footer from './components/common/footer';
+import Body from './components/pages/body';
+import PlayNow from './components/pages/playnow';
+import Game from './components/pages/game';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="d-flex flex-column min-vh-100">
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <Header />
+                <Body />
+                <Footer />
+              </>
+            }
+          />
+          <Route path="/playnow" element={
+              <>
+                <Header />
+                <PlayNow />
+                <Footer />
+              </>
+            } />
+          <Route path="/game" element={<Game />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 

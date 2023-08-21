@@ -36,3 +36,29 @@
     transform: rotate(360deg);
   }
 }
+
+@font-face {
+  font-family: 'Retro Font';
+  src: url('../fonts/DigibraRegular-nR93V.otf') format('opentype');
+}
+
+.title {
+  font-family: 'Retro Font', sans-serif;
+}
+
+/* Circular elements */
+.circle {
+  width: 50px;
+  height: 50px;
+  background-color: #0074D9; /* You can change the background color */
+  border-radius: 50%; /* Makes it circular */
+  margin: 10px; /* Adjust the margin as needed */
+}
+
+/* Styling for the "+" symbol */
+.plus {
+  font-size: 24px;
+  color: #000000; /* Text color */
+  font-weight: bold; /* Optional: Make it bold */
+  margin: 1 10px; /* Adjust the margin as needed */
+}
