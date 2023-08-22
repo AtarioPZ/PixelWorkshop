@@ -45,3 +45,22 @@
 .title {
   font-family: 'Retro Font', sans-serif;
 }
+
+.custom-menu {
+  display: flex;
+  flex-direction: column; /* Display vertically by default */
+}
+
+/* Media query for mobile view (horizontal layout) */
+@media (max-width: 767px) {
+  .custom-menu {
+    flex-direction: row; /* Display horizontally on mobile */
+    justify-content: space-between; /* Spacing between menu items */
+  }
+}
+
+/* Maximum width for menu buttons on PC view */
+.custom-menu .cta-button {
+  max-width: 200px; /* Adjust the maximum width as needed */
+  width: 100%; /* Make sure buttons take full width within the maximum width */
+}

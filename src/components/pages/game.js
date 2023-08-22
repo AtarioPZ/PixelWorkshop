@@ -35,7 +35,7 @@ function Game() {
 
         <div className="col-md-3 p-2">
           {/* Menu */}
-          <div className="btn-group-vertical">
+          <div className="btn-group custom-menu">
             <Link to="/" className="cta-button nes-btn my-3">
               Home
             </Link>
