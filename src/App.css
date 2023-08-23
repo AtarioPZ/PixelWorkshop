@@ -64,3 +64,34 @@
   max-width: 200px; /* Adjust the maximum width as needed */
   width: 100%; /* Make sure buttons take full width within the maximum width */
 }
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  pointer-events: auto;
+}
+
+.modal-content {
+  width: 300px; /* Adjust the width as needed */
+  /* Add other styles for the content container */
+}
+
+/* Center the content within the container */
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+  border-radius: 5px; /* Add border radius for rounded corners */
+  /* Add other styles as needed */
+}
