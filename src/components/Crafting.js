@@ -62,7 +62,7 @@ function Crafting({ selectedItemSlot1, selectedItemSlot2, items, setItems, reset
           <div className="modal-content">
             <div className="nes-container is-dark with-title is-centered">
               <p className="title">Crafting Error</p>
-              <p>Combination not found or already exists.</p>
+              <p>Combination not found.</p>
               <button className="nes-btn" onClick={closeModal}>
                 Close
               </button>
