@@ -1,30 +1,50 @@
 import React from 'react';
+import craftingRecipes from './CraftingRecipes';
 
 function Crafting({ selectedItemSlot1, selectedItemSlot2, items, setItems, resetSlots, itemMapping }) {
-    const handleCrafting = () => {
-        if (selectedItemSlot1 && selectedItemSlot2) {
-          let newItem = '';
-          // Crafting logic based on selected items in the slots
-          if (selectedItemSlot1 === 'Item 2' && selectedItemSlot2 === 'Item 2') {
-            newItem = 'Item 5'; // Craft "Item 2" (water) + "Item 2" (water) into "Item 5" (bubble potion)
-          }
-          else if ((selectedItemSlot1 === 'Item 1' && selectedItemSlot2 === 'Item 2') || (selectedItemSlot1 === 'Item 2' && selectedItemSlot2 === 'Item 1')){
-            newItem = 'Item 6'; // Craft "Item 1" (fire) + "Item 2" (water) into "Item 5" (steam)
-          }
-      
-          if (newItem) {
+  // Helper function to check if two arrays are equal
+  const arraysEqual = (a, b) => {
+    return JSON.stringify(a) === JSON.stringify(b);
+  };
+
+  const handleCrafting = () => {
+    if (selectedItemSlot1 && selectedItemSlot2) {
+      // Crafting logic based on selected items in the slots
+      for (const recipe of craftingRecipes) {
+        if (
+          (arraysEqual([selectedItemSlot1, selectedItemSlot2], recipe.ingredients.sort()) ||
+            arraysEqual([selectedItemSlot2, selectedItemSlot1], recipe.ingredients.sort()))
+        ) {
+          const newItem = recipe.result;
+          
+          // Check if the item already exists in the items list
+          if (!items.includes(newItem)) {
             setItems((prevItems) => [...prevItems, newItem]);
-            // Reset both slots to null
-            if (selectedItemSlot1 === selectedItemSlot2) {
-              resetSlots();
-            } else {
-              resetSlots();
-              resetSlots();
-            }
           }
+
+          // Reset both slots to null
+          if (selectedItemSlot1 === selectedItemSlot2) {
+            resetSlots();
+          } else {
+            resetSlots();
+            resetSlots();
+          }
+
+          // Exit the loop since the recipe is found
+          return;
         }
-      };
-      
+      }
+    }
+  };
+
+  const clearSlot = (slot) => {
+    // Set the corresponding slot state to null
+    if (slot === 'slot1') {
+      resetSlots();
+    } else if (slot === 'slot2') {
+      resetSlots();
+    }
+  };
 
   return (
     <div className="nes-container p-3">
@@ -39,7 +59,7 @@ function Crafting({ selectedItemSlot1, selectedItemSlot2, items, setItems, reset
               height={"100px"}
             />
           ) : (
-            <div className="crafting-area-placeholder">Slot 1</div>
+            <div className="crafting-area-placeholder" onClick={() => clearSlot('slot1')}>Slot 1</div>
           )}
           <img
             src="./assets/sprites/combine.png"
@@ -55,7 +75,7 @@ function Crafting({ selectedItemSlot1, selectedItemSlot2, items, setItems, reset
               height={"100px"}
             />
           ) : (
-            <div className="crafting-area-placeholder">Slot 2</div>
+            <div className="crafting-area-placeholder" onClick={() => clearSlot('slot2')}>Slot 2</div>
           )}
         </div>
         {/* Craft button */}

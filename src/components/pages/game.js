@@ -8,9 +8,15 @@ import itemMapping from '../itemMapping';
 
 function Game() {
   const location = useLocation();
-  const [items, setItems] = useState(['Item 1', 'Item 2']);
-  const [selectedItemSlot1, setSelectedItemSlot1] = useState(null);
+  
+  // Initialize the items state with the first 4 items
+  const [items, setItems] = useState(['Item 1', 'Item 2', 'Item 3', 'Item 4']);
+  
+  // Initialize the selected slots to the first 2 items
+  const [selectedItemSlot1, setSelectedItemSlot1] = (useState(null));
   const [selectedItemSlot2, setSelectedItemSlot2] = useState(null);
+  
+  const [itemSelected, setItemSelected] = useState(null);
 
   // Handle item selection for crafting slots
   const handleItemSelect = (item) => {
@@ -19,6 +25,13 @@ function Game() {
     } else if (!selectedItemSlot2) {
       setSelectedItemSlot2(item);
     }
+    // Add the animation class to the selected item
+    setItemSelected(item);
+
+    // Remove the animation class after a short delay (e.g., 500ms)
+    setTimeout(() => {
+      setItemSelected(null);
+    }, 500);
   };
 
   // Function to reset both slots
