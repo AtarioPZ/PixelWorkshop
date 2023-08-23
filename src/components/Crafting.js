@@ -36,18 +36,8 @@ function Crafting({ selectedItemSlot1, selectedItemSlot2, items, setItems, reset
       }
     }
   };
-
-  const clearSlot = (slot) => {
-    // Set the corresponding slot state to null
-    if (slot === 'slot1') {
-      resetSlots();
-    } else if (slot === 'slot2') {
-      resetSlots();
-    }
-  };
-
   return (
-    <div className="nes-container p-3">
+    <div className="nes-container p-3" style={{ backgroundImage: 'url("./assets/background/ybg.jpg")', backgroundSize: '100% 100%' }}>
       <div className="d-flex flex-column py-5">
         {/* Display the selected items in the Crafting component */}
         <div className="d-flex justify-content-center align-items-center py-5">
@@ -59,7 +49,7 @@ function Crafting({ selectedItemSlot1, selectedItemSlot2, items, setItems, reset
               height={"100px"}
             />
           ) : (
-            <div className="crafting-area-placeholder" onClick={() => clearSlot('slot1')}>Slot 1</div>
+            <div className="crafting-area-placeholder">Slot 1</div>
           )}
           <img
             src="./assets/sprites/combine.png"
@@ -75,7 +65,7 @@ function Crafting({ selectedItemSlot1, selectedItemSlot2, items, setItems, reset
               height={"100px"}
             />
           ) : (
-            <div className="crafting-area-placeholder" onClick={() => clearSlot('slot2')}>Slot 2</div>
+            <div className="crafting-area-placeholder">Slot 2</div>
           )}
         </div>
         {/* Craft button */}
