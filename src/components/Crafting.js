@@ -75,7 +75,7 @@ function Crafting({ selectedItemSlot1, selectedItemSlot2, items, setItems, reset
       <div className="nes-container rounded-4 p-3" style={{ backgroundImage: 'url("./assets/background/ybg.jpg")', backgroundSize: '100% 100%' }}>
         <div className="d-flex flex-column py-5">
           {/* Display the selected items in the Crafting component */}
-          <div className="d-flex justify-content-center align-items-center py-5">
+          <div className="d-flex justify-content-center align-items-center flex-wrap py-5">
             <div className="nes-container rounded-4">
             {selectedItemSlot1 ? (
               <img
@@ -106,7 +106,7 @@ function Crafting({ selectedItemSlot1, selectedItemSlot2, items, setItems, reset
               <div className="crafting-slot">Slot 2</div>
             )}
           </div>
-            </div>
+        </div>
           {/* Craft button */}
           <button className="nes-btn mt-2" onClick={handleCrafting}>
             Craft

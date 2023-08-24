@@ -120,3 +120,31 @@
   border: none;
   border-radius: 6px;
 }
+
+
+/* CSS for responsive crafting area layout */
+.crafting-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .crafting-content {
+    flex-direction: row;
+  }
+}
+
+.crafting-slots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px; /* Adjust the gap between slots as needed */
+}
+
+.crafting-slots > .nes-container {
+  flex: 1;
+  text-align: center;
+  min-width: 100px; /* Adjust the minimum width of slots as needed */
+}

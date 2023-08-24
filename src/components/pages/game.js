@@ -32,12 +32,12 @@ function Game() {
   };
 
   return (
-    <div className="nes-container flex-grow-1 m-4" style={{ backgroundImage: 'url("./assets/background/ybg.jpg")', backgroundSize: '100% 100%' }}>
+    <div className="nes-container flex-grow-1 m-1" style={{ backgroundImage: 'url("./assets/background/ybg.jpg")', backgroundSize: '100% 100%' }}>
       <div className="row">
         {location.pathname !== '/game' && <Header />}
         {location.pathname !== '/game' && <Footer />}
 
-        <div className="col-md-3 p-2">
+        <div className="col-md-3 p-1">
           {/* Menu */}
           <div className="btn-group custom-menu">
             <Link to="/" className="cta-button nes-btn my-3">
