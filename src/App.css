@@ -1,42 +1,3 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 @font-face {
   font-family: 'Retro Font';
   src: url('../fonts/DigibraRegular-nR93V.otf') format('opentype');
@@ -46,23 +7,24 @@
   font-family: 'Retro Font', sans-serif;
 }
 
+/* Used in Game Page */
 .custom-menu {
   display: flex;
-  flex-direction: column; /* Display vertically by default */
+  flex-direction: column;
 }
 
 /* Media query for mobile view (horizontal layout) */
 @media (max-width: 767px) {
   .custom-menu {
-    flex-direction: row; /* Display horizontally on mobile */
-    justify-content: space-between; /* Spacing between menu items */
+    flex-direction: row;
+    justify-content: space-between;
   }
 }
 
 /* Maximum width for menu buttons on PC view */
 .custom-menu .cta-button {
-  max-width: 200px; /* Adjust the maximum width as needed */
-  width: 100%; /* Make sure buttons take full width within the maximum width */
+  max-width: 200px;
+  width: 100%;
 }
 
 .modal-overlay {
@@ -80,8 +42,7 @@
 }
 
 .modal-content {
-  width: 300px; /* Adjust the width as needed */
-  /* Add other styles for the content container */
+  width: 300px;
 }
 
 /* Center the content within the container */
@@ -92,8 +53,7 @@
   justify-content: center;
   text-align: center;
   padding: 20px;
-  border-radius: 5px; /* Add border radius for rounded corners */
-  /* Add other styles as needed */
+  border-radius: 5px;
 }
 
 /* CSS for the scrollable container */
@@ -105,7 +65,7 @@
 
 /* Hide the scrollbar */
 .scrollable-container::-webkit-scrollbar {
-  width: 1.2em; /* Adjust the width as needed */
+  width: 1.2em; /* width of the scroll bar */
 }
 
 /* Hide the scrollbar track */
@@ -136,15 +96,40 @@
   }
 }
 
-.crafting-slots {
+/* CSS for responsive crafting area layout */
+.crafting-elements {
   display: flex;
-  align-items: center;
+  flex-wrap: wrap;
   justify-content: center;
-  gap: 10px; /* Adjust the gap between slots as needed */
+  align-items: center;
 }
 
-.crafting-slots > .nes-container {
-  flex: 1;
-  text-align: center;
-  min-width: 100px; /* Adjust the minimum width of slots as needed */
+.slot,
+.combine-image {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+@media (min-width: 768px) {
+  .slot,
+  .combine-image {
+    width: auto;
+    margin-bottom: 0;
+  }
+}
+
+.loading-spinner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
 }

@@ -1,8 +1,8 @@
 const craftingRecipes = [
-  {
-    ingredients: ['Item 1', 'Item 1'],
-    result: 'Item 14', // Blaze Gem
-  },
+    {
+      ingredients: ['Item 1', 'Item 1'],
+      result: 'Item 14', // Blaze Gem
+    },
     {
       ingredients: ['Item 2', 'Item 2'],
       result: 'Item 5', // Bubble Potion
