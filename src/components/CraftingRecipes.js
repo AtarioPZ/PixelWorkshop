@@ -8,6 +8,14 @@ const craftingRecipes = [
       result: 'Item 5', // Bubble Potion
     },
     {
+      ingredients: ['Item 3', 'Item 3'],
+      result: 'Item 10', // Cold Breeze
+    },
+    {
+      ingredients: ['Item 4', 'Item 4'],
+      result: 'Item 15', // Cold Breeze
+    },
+    {
       ingredients: ['Item 1', 'Item 2'],
       result: 'Item 6', // Steam
     },
@@ -22,11 +30,7 @@ const craftingRecipes = [
     {
       ingredients: ['Item 3', 'Item 2'],
       result: 'Item 9', // Aqua Breeze
-    },
-    {
-      ingredients: ['Item 3', 'Item 3'],
-      result: 'Item 10', // Cold Breeze
-    },
+    },    
     {
       ingredients: ['Item 2', 'Item 4'],
       result: 'Item 11', // Mud Ball

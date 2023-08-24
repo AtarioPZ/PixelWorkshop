@@ -57,6 +57,7 @@ function Crafting({ selectedItemSlot1, selectedItemSlot2, items, setItems, reset
 
   return (
     <div className="crafting-container">
+      {/* Overlay UI */}
       {isModalOpen && (
         <div className="modal-overlay">
           <div className="modal-content">
@@ -71,10 +72,11 @@ function Crafting({ selectedItemSlot1, selectedItemSlot2, items, setItems, reset
         </div>
       )}
 
-      <div className="nes-container p-3" style={{ backgroundImage: 'url("./assets/background/ybg.jpg")', backgroundSize: '100% 100%' }}>
+      <div className="nes-container rounded-4 p-3" style={{ backgroundImage: 'url("./assets/background/ybg.jpg")', backgroundSize: '100% 100%' }}>
         <div className="d-flex flex-column py-5">
           {/* Display the selected items in the Crafting component */}
           <div className="d-flex justify-content-center align-items-center py-5">
+            <div className="nes-container rounded-4">
             {selectedItemSlot1 ? (
               <img
                 src={`/assets/sprites/items/${itemMapping[selectedItemSlot1]}`} // Use itemMapping to get the image file name
@@ -83,14 +85,16 @@ function Crafting({ selectedItemSlot1, selectedItemSlot2, items, setItems, reset
                 height={"100px"}
               />
             ) : (
-              <div className="crafting-area-placeholder">Slot 1</div>
+              <div className="crafting-slot">Slot 1</div>
             )}
+            </div>
             <img
               src="./assets/sprites/combine.png"
               alt="combine"
               width={"50px"}
               height={"50px"}
             />
+            <div className="nes-container rounded-4">
             {selectedItemSlot2 ? (
               <img
                 src={`/assets/sprites/items/${itemMapping[selectedItemSlot2]}`} // Use itemMapping to get the image file name
@@ -99,9 +103,10 @@ function Crafting({ selectedItemSlot1, selectedItemSlot2, items, setItems, reset
                 height={"100px"}
               />
             ) : (
-              <div className="crafting-area-placeholder">Slot 2</div>
+              <div className="crafting-slot">Slot 2</div>
             )}
           </div>
+            </div>
           {/* Craft button */}
           <button className="nes-btn mt-2" onClick={handleCrafting}>
             Craft

@@ -13,6 +13,8 @@ const itemMapping = {
     'Item 12': 'smoke bomb.png',
     'Item 13': 'clay brick.png',
     'Item 14': 'blaze gem.png',
+    'Item 15': 'stone block.png',
+
   };
   
   export default itemMapping;

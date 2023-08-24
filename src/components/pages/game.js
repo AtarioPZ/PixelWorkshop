@@ -64,17 +64,18 @@ function Game() {
           />
         </div>
 
-        <div className="col-md-3">
-          {/* Items */}
-          <div className="row p-2" style={{ backgroundImage: 'url("./assets/background/ui.png")', backgroundSize: '100% 100%' }}>
+        <div className="col-md-3" style={{ backgroundImage: 'url("./assets/background/framebg.png")', backgroundSize: '100% 100%', paddingTop: '40px', paddingBottom: '50px' }}>
+        {/* Items */}
+        <div className="scrollable-container">
+          <div className="row py-4">
             {items.map((item, index) => (
-              <div className="col-md-6" key={index}>
+              <div className="col" key={index}>
                 <div
-                  className="container m-1 my-4 item-list-item is-pointer"
+                  className="container my-4 item-list-item is-pointer"
                   onClick={() => handleItemSelect(item)}
                 >
                   <img
-                    src={`/assets/sprites/items/${itemMapping[item]}`} // Use itemMapping to get the image file name
+                    src={`/assets/sprites/items/${itemMapping[item]}`}
                     alt={item}
                     width={"100px"}
                     height={"100px"}
@@ -84,6 +85,7 @@ function Game() {
             ))}
           </div>
         </div>
+      </div>
       </div>
     </div>
   );

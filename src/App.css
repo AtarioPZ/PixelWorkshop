@@ -95,3 +95,28 @@
   border-radius: 5px; /* Add border radius for rounded corners */
   /* Add other styles as needed */
 }
+
+/* CSS for the scrollable container */
+.scrollable-container {
+  max-height: 500px;  
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+/* Hide the scrollbar */
+.scrollable-container::-webkit-scrollbar {
+  width: 1.2em; /* Adjust the width as needed */
+}
+
+/* Hide the scrollbar track */
+.scrollable-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Hide the scrollbar thumb */
+.scrollable-container::-webkit-scrollbar-thumb {
+  background: url('/public/assets/sprites/scrollbar.png');
+  background-size: 100% 100%;  
+  border: none;
+  border-radius: 6px;
+}
