@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Crafting from '../Crafting';
 import itemMapping from '../itemMapping';
 import { PacmanLoader } from "react-spinners";
+import AudioPlayer from '../AudioPlayer'; 
 
 function Game() {  
   const [items, setItems] = useState(['Item 1', 'Item 2', 'Item 3', 'Item 4']);
@@ -10,6 +11,11 @@ function Game() {
   const [selectedItemSlot2, setSelectedItemSlot2] = useState(null);
 
   const [showConfirmation, setShowConfirmation] = useState(false);
+  const [showCreditsOverlay, setShowCreditsOverlay] = useState(false);
+
+  const [showSettingsOverlay, setShowSettingsOverlay] = useState(false);  
+  const [isMusicEnabled, setIsMusicEnabled] = useState(false); // Start with music disabled
+  const [musicVolume, setMusicVolume] = useState(50);
 
   const handleItemSelect = (item) => {
     if (!selectedItemSlot1) {
@@ -37,6 +43,23 @@ function Game() {
     setShowConfirmation(false);
   };
 
+  const toggleCreditsOverlay = () => {
+    setShowCreditsOverlay(!showCreditsOverlay);
+  };  
+
+  const toggleSettingsOverlay = () => {
+    setShowSettingsOverlay(!showSettingsOverlay);
+  };   
+  
+  const toggleMusic = () => {
+    setIsMusicEnabled(!isMusicEnabled);
+  };
+  
+  const handleMusicVolumeChange = (event) => {
+    setMusicVolume(event.target.value);
+  };
+  
+
   const [isLoading, setIsLoading] = useState(true);
   
   useEffect(() => {
@@ -44,27 +67,32 @@ function Game() {
     const loadingTimeout = setTimeout(() => {
       setIsLoading(false);
     }, 3000);
-  
+
     // Clear the timeout when the component unmounts
-    return () => clearTimeout(loadingTimeout);
-  }, []);  
+    return () => {
+      clearTimeout(loadingTimeout);
+    }
+  }, []);
 
   return (
-  <div id="game-page" className={`nes-container flex-grow-1 m-1`} style={{ backgroundImage: 'url("./assets/background/ybg.jpg")', backgroundSize: '100% 100%' }}>
-    {/* Main Game Components */}
-    <div className="row">
-        {/* MENU BUTONS */}
+    <div id="game-page" className={`nes-container flex-grow-1 m-1`} style={{ backgroundImage: 'url("./assets/background/ybg.jpg")', backgroundSize: '100% 100%' }}>
+      {/* Audio Player */}
+      <AudioPlayer isMusicEnabled={isMusicEnabled} musicVolume={musicVolume} />
+
+      {/* Main Game Components */}
+      <div className="row">
+        {/* MENU BUTTONS */}
         <div className="col-md-3 p-1">
           <div className="btn-group custom-menu">
             <button className="cta-button nes-btn my-3" onClick={handleHomeClick}>
               Home
             </button>
-            <Link to="#" className="cta-button nes-btn my-3">
+            <button className="cta-button nes-btn my-3" onClick={toggleSettingsOverlay}>
               Settings
-            </Link>
-            <Link to="#" className="cta-button nes-btn my-3">
+            </button>
+            <button className="cta-button nes-btn my-3" onClick={toggleCreditsOverlay}>
               Credits
-            </Link>
+            </button>
           </div>
         </div>
 
@@ -102,31 +130,84 @@ function Game() {
             </div>
           </div>
         </div>
-    </div>
+      </div>
 
-    {/* Display loading spinner when isLoading is true */}
-    {isLoading && (
-       <div className={`loading-spinner ${isLoading ? '' : 'hidden'}`}>
-        <PacmanLoader color={"#ffffff"} size={50} />
-      </div>    
-    )}
+      {/* Display loading spinner when isLoading is true */}
+      {isLoading && (
+        <div className={`loading-spinner ${isLoading ? '' : 'hidden'}`}>
+          <PacmanLoader color={"#ffffff"} size={50} />
+        </div>    
+      )}
 
-    {/* Confirmation overlay */}
-    {showConfirmation && (
-      <div className="modal-overlay">
-        <div className="modal-content">
-          <div className="nes-container is-dark with-title is-centered">
-            <p className="title">Confirmation</p>
-            <p>Are you sure you want to go home?</p>
-            <Link to="/" className="cta-button nes-btn my-3" onClick={confirmGoHome}>
-              Go Home
-            </Link>
-            <button className="nes-btn" onClick={cancelGoHome}>
-              Back to Game
-            </button>
+      {/* Confirmation overlay */}
+      {showConfirmation && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <div className="nes-container is-dark with-title is-centered">
+              <p className="title">Confirmation</p>
+              <p>Are you sure you want to go home?</p>
+              <Link to="/" className="cta-button nes-btn my-3" onClick={confirmGoHome}>
+                Go Home
+              </Link>
+              <button className="nes-btn" onClick={cancelGoHome}>
+                Back to Game
+              </button>
+            </div>
           </div>
         </div>
-      </div>
+      )}
+
+      {/* Credits overlay */}
+      {showCreditsOverlay && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <div className="nes-container is-dark with-title is-centered">
+              <p className="title">Credits</p>
+              
+              <p>Pixel Sprites: Generated by <a href="https://openai.com/dall-e-2" target="_blank" rel="noopener noreferrer">DALL-E</a></p>
+              <p>  Retro Font: <a href="https://www.fontspace.com/digibra-font-f76859" target="_blank" rel="noopener noreferrer">Digibra</a> by Authentype</p>
+              <button className="nes-btn" onClick={toggleCreditsOverlay}>
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Settings */}
+      {showSettingsOverlay && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <div className="nes-container is-dark with-title is-centered">
+              <p className="title">Settings</p>
+              <div className="d-flex justify-content-between">
+                <label>Enable Music</label>
+                <label>
+                  <input type="checkbox" checked={isMusicEnabled} onChange={toggleMusic} />
+                </label>
+              </div>
+
+              <div className="d-flex justify-content-between align-items-center mt-3">
+                <label>Volume</label>
+                <label>
+                  <input
+                    type="range"
+                    min="0"
+                    max="100"
+                    value={musicVolume}
+                    onChange={handleMusicVolumeChange}
+                  />
+                </label>
+              </div>
+              
+              <div className="text-center mt-3">
+                <button className="nes-btn" onClick={toggleSettingsOverlay}>
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );

@@ -1,73 +1,93 @@
 import React, { useState } from 'react';
 import craftingRecipes from './CraftingRecipes';
+import MiniGame from './minigame';
 
-function Crafting({ selectedItemSlot1, selectedItemSlot2, items, setItems, resetSlots, itemMapping }) {
-  //Function to check if two arrays are equal
+function Crafting({ selectedItemSlot1, selectedItemSlot2, items, setItems, resetSlots, itemMapping }) {  
   const arraysEqual = (a, b) => {
     return JSON.stringify(a) === JSON.stringify(b);
   };
-
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  
+  const [isMiniGameActive, setIsMiniGameActive] = useState(false);
+  const [selectedRecipe, setSelectedRecipe] = useState(null);
+  const [craftingFailed, setCraftingFailed] = useState(false);
+  const [combinationNotFound, setCombinationNotFound] = useState(false);
 
   const handleCrafting = () => {
     if (selectedItemSlot1 && selectedItemSlot2) {
-      // Crafting logic based on selected items in the slots
-      let recipeExists = false;
+      let craftingSuccess = false; // Track crafting success
+
+      // Check if there's a matching recipe
       for (const recipe of craftingRecipes) {
         if (
           (arraysEqual([selectedItemSlot1, selectedItemSlot2], recipe.ingredients.sort()) ||
             arraysEqual([selectedItemSlot2, selectedItemSlot1], recipe.ingredients.sort()))
         ) {
-          const newItem = recipe.result;
-
-          // Check if the item already exists in the items list
-          if (!items.includes(newItem)) {
-            setItems((prevItems) => [...prevItems, newItem]);
-          } else {
-            // Recipe already exists
-            recipeExists = true;
-          }
-
-          // Reset both slots to null
-          if (selectedItemSlot1 === selectedItemSlot2) {
-            resetSlots();
-          } else {
-            resetSlots();
-            resetSlots();
-          }
-
-          // Exit the loop since the recipe is found
-          return;
+          setSelectedRecipe(recipe); // Store the selected recipe
+          setIsMiniGameActive(true); // Activate the mini-game
+          craftingSuccess = true;
+          break;
         }
       }
 
       // If recipe does not exist, show modal
-      if (!recipeExists) {
-        setIsModalOpen(true);
+      if (!craftingSuccess) {
+        setCombinationNotFound(true);
       }
     }
   };
 
-  const closeModal = () => {
-    setIsModalOpen(false);
+  const handleMiniGameFailure = () => {    
+    setIsMiniGameActive(false);
+    setCraftingFailed(true);
+  };
+
+  const handleMiniGameSuccess = () => {
+    const newItem = selectedRecipe.result;
+
+    // Check if the item already exists in the items list
+    if (!items.includes(newItem)) {
+      setItems((prevItems) => [...prevItems, newItem]);
+    }
+
+    // Reset both slots to null
+    resetSlots();
+    resetSlots();
+
+    // Deactivate the mini-game
+    setIsMiniGameActive(false);
+  };
+
+  const closeModal = () => {    
     // Reset both slots to null when the modal is closed
-    resetSlots();
-    resetSlots();
+    resetSlots();    
+    setCraftingFailed(false);
+    setCombinationNotFound(false);
   };
 
   return (
     <div className="crafting-container">
-      {/* Overlay UI */}
-      {isModalOpen && (
+      {/* Overlay UI for Crafting Failure */}
+      {craftingFailed && (
         <div className="modal-overlay">
-          <div className="modal-content">
-            <div className="nes-container is-dark with-title is-centered">
-              <p className="title">Crafting Error</p>
-              <p>Combination not found.</p>
-              <button className="nes-btn" onClick={closeModal}>
-                Close
-              </button>
-            </div>
+          <div className="nes-container is-dark with-title is-centered">
+            <p className="title">Crafting Error</p>
+            <p>Crafting failed</p>
+            <button className="nes-btn" onClick={closeModal}>
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Overlay UI for Combination Failure */}
+      {combinationNotFound && (
+        <div className="modal-overlay">
+          <div className="nes-container is-dark with-title is-centered">
+            <p className="title">Crafting Error</p>
+            <p>Combination not found.</p>
+            <button className="nes-btn" onClick={closeModal}>
+              Close
+            </button>
           </div>
         </div>
       )}
@@ -81,7 +101,7 @@ function Crafting({ selectedItemSlot1, selectedItemSlot2, items, setItems, reset
             <div className="nes-container rounded-4 slot">
               {selectedItemSlot1 ? (
                 <img
-                  src={`/assets/sprites/items/${itemMapping[selectedItemSlot1]}`} // Use itemMapping to get the image file name
+                  src={`/assets/sprites/items/${itemMapping[selectedItemSlot1]}`}
                   alt={selectedItemSlot1}
                   width={"100px"}
                   height={"100px"}
@@ -101,7 +121,7 @@ function Crafting({ selectedItemSlot1, selectedItemSlot2, items, setItems, reset
             <div className="nes-container rounded-4 slot">
               {selectedItemSlot2 ? (
                 <img
-                  src={`/assets/sprites/items/${itemMapping[selectedItemSlot2]}`} // Use itemMapping to get the image file name
+                  src={`/assets/sprites/items/${itemMapping[selectedItemSlot2]}`}
                   alt={selectedItemSlot2}
                   width={"100px"}
                   height={"100px"}
@@ -116,7 +136,20 @@ function Crafting({ selectedItemSlot1, selectedItemSlot2, items, setItems, reset
           <button className="nes-btn mt-2" onClick={handleCrafting}>
             Craft
           </button>
-          
+
+          {/* Render the mini-game if it's active */}
+          {isMiniGameActive && (
+            <div className="minigame-overlay">
+              <div className="mini-game-container">
+                <MiniGame
+                  selectedItemSlot1={selectedItemSlot1}
+                  selectedItemSlot2={selectedItemSlot2}
+                  onCraftingSuccess={handleMiniGameSuccess}
+                  onCraftingFailure={handleMiniGameFailure}
+                />
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>
