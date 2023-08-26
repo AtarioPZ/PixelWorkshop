@@ -61,53 +61,48 @@ function MiniGame({ onCraftingSuccess, onCraftingFailure }) {
   }, []);
 
   return (
-    <div className="minigame-overlay">
-      <div className="minigame-container">
-        <p>Select the element: {targetElement.name}</p>
-        <div
-          className="elements-container"
-          style={{
-            width: `${containerWidth}px`, // Set the width of the container
-            overflow: 'hidden', // Hide overflowing elements
-            position: 'relative', // Position the ball relative to the container
-          }}
-        >
-          {elements.map((element, index) => (
-            <div
-              key={element.name}
-              className={`element-button ${
-                element.name === targetElement.name ? 'target-element' : ''
-              }`}
-              style={{
-                width: `${elementWidth}px`, // Set the width of each element
-                height: `${elementWidth}px`, // Set the height of each element
-                backgroundImage: `url(${element.image})`,
-                backgroundSize: `100% 100%`,
-                transition: 'transform 0.5s ease', // Smooth transition
-                transform: `translateX(${index * elementWidth - ballPosition}px)`, // Adjust element position
-              }}
-            />
-          ))}
-        </div>
-        <button className="craft-button" onClick={handleCraftClick}>
-          Craft
-        </button>
+  <div className="minigame-overlay">
+    <div className="minigame-container">
+      <p>Select the element: {targetElement.name}</p>
+      <div className="elements-container" style={{ width: `${containerWidth}px`, overflow: 'hidden', position: 'relative', }}>
+        {elements.map((element, index) => (
+          <div
+            key={element.name}
+            className={`element-button ${
+              element.name === targetElement.name ? 'target-element' : ''
+            }`}
+            style={{
+              width: `${elementWidth}px`,
+              height: `${elementWidth}px`,
+              backgroundImage: `url(${element.image})`,
+              backgroundSize: '100% 100%',
+              transition: 'transform 0.5s ease',              
+              zIndex: element.name === targetElement.name ? 1 : 'auto', // Ensure the ball is on top of the target element
+            }}
+          />
+        ))}
         <div
           className="ball"
           style={{
-            width: '20px', // Adjust the ball size
-            height: '20px', // Adjust the ball size
+            width: '20px',
+            height: '20px',
             backgroundColor: 'red',
             borderRadius: '50%',
-            position: 'absolute', // Position the ball absolutely within the container
-            left: `${ballPosition}px`, // Position the ball based on ballPosition
-            transition: 'left 0.5s ease', // Smooth transition for ball movement
+            position: 'absolute',
+            top: '50%', // Vertical positioning remains the same
+            transition: 'left 2s linear', // Adjust the transition duration and use 'linear' timing function for a smooth movement
+            animation: 'moveBall 2s linear infinite', // Add animation for looping back-and-forth movement
+            animationDirection: 'alternate', // Make the animation alternate direction
           }}
         />
-        <p>Chances Left: {chancesLeft}</p>
       </div>
+      <button className="nes-btn cta-btn craft-button" onClick={handleCraftClick}>
+        Craft
+      </button>
+      <p>Chances Left: {chancesLeft}</p>
     </div>
-  );
+  </div>
+);
 }
 
 export default MiniGame;

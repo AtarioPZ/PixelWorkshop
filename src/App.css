@@ -148,7 +148,6 @@
   z-index: 9999;
 }
 
-
 .minigame-container {
   background-color: white;
   border-radius: 5px;
@@ -157,28 +156,22 @@
   position: relative;
 }
 
-.element-buttons {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
-}
-
 .elements-container {
   display: flex; /* Display elements horizontally */
   overflow-x: auto; /* Add a horizontal scrollbar if elements overflow */
-  width: 100%; /* Ensure the container takes full width */
+  width: auto; /* Remove the fixed width to fit elements snugly */
   height: 120px; /* Set a fixed height for the container */
 }
 
 .element-button {
-  background-color: #4caf50;
+  background-color: #50e855;
   color: white;
   border: none;
   padding: 10px 20px;
-  border-radius: 5px;
   cursor: pointer;
-  /* Add margin to separate elements */
-  margin: 0 5px;
+  /* Use flex-grow to make buttons expand and fill available space */
+  flex-grow: 1;
+  margin: 0; /* Remove margin to eliminate white spaces */
 }
 
 .ball {
@@ -189,4 +182,17 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
+  z-index: 3;
+}
+
+@keyframes moveBall {
+  0% {
+    left: 0;
+  }
+  50% {
+    left: 100%; /* Move the ball to the right end */
+  }
+  100% {
+    left: 0; /* Move the ball back to the left end */
+  }
 }

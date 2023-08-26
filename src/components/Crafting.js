@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import craftingRecipes from './CraftingRecipes';
 import MiniGame from './minigame';
 
-function Crafting({ selectedItemSlot1, selectedItemSlot2, items, setItems, resetSlots, itemMapping }) {  
+function Crafting({ selectedItemSlot1, selectedItemSlot2, items, setItems, resetSlots, itemMapping, setSelectedItemSlot1, setSelectedItemSlot2 }) {  
   const arraysEqual = (a, b) => {
     return JSON.stringify(a) === JSON.stringify(b);
   };
@@ -33,6 +33,16 @@ function Crafting({ selectedItemSlot1, selectedItemSlot2, items, setItems, reset
       if (!craftingSuccess) {
         setCombinationNotFound(true);
       }
+    }
+  };
+
+  const handleSlotClick = (slotNumber) => {
+    if (slotNumber === 1) {
+      // Reset Slot 1
+      setSelectedItemSlot1(null);
+    } else if (slotNumber === 2) {
+      // Reset Slot 2
+      setSelectedItemSlot2(null);
     }
   };
 
@@ -95,10 +105,9 @@ function Crafting({ selectedItemSlot1, selectedItemSlot2, items, setItems, reset
       {/* Crafting components */}
       <div className="nes-container rounded-4 p-3" style={{ backgroundImage: 'url("./assets/background/ybg.jpg")', backgroundSize: '100% 100%' }}>
         <div className="d-flex flex-column py-5">
-
           {/* Display the selected items in the Crafting component */}
           <div className="crafting-elements py-5">
-            <div className="nes-container rounded-4 slot">
+            <div className="nes-container rounded-4 slot" onClick={() => handleSlotClick(1)}> {/* Add onClick handler */}
               {selectedItemSlot1 ? (
                 <img
                   src={`/assets/sprites/items/${itemMapping[selectedItemSlot1]}`}
@@ -118,7 +127,7 @@ function Crafting({ selectedItemSlot1, selectedItemSlot2, items, setItems, reset
                 height={"50px"}
               />
             </div>
-            <div className="nes-container rounded-4 slot">
+            <div className="nes-container rounded-4 slot" onClick={() => handleSlotClick(2)}> {/* Add onClick handler */}
               {selectedItemSlot2 ? (
                 <img
                   src={`/assets/sprites/items/${itemMapping[selectedItemSlot2]}`}

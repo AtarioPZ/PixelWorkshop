@@ -7,6 +7,7 @@ import AudioPlayer from '../AudioPlayer';
 
 function Game() {  
   const [items, setItems] = useState(['Item 1', 'Item 2', 'Item 3', 'Item 4']);
+  
   const [selectedItemSlot1, setSelectedItemSlot1] = useState(null);
   const [selectedItemSlot2, setSelectedItemSlot2] = useState(null);
 
@@ -66,7 +67,7 @@ function Game() {
     // Simulate loading for 3 seconds (adjust the duration as needed)
     const loadingTimeout = setTimeout(() => {
       setIsLoading(false);
-    }, 3000);
+    }, 1500);
 
     // Clear the timeout when the component unmounts
     return () => {
@@ -79,10 +80,10 @@ function Game() {
       {/* Audio Player */}
       <AudioPlayer isMusicEnabled={isMusicEnabled} musicVolume={musicVolume} />
 
-      {/* Main Game Components */}
+      {/* Main Game Components */}      
       <div className="row">
         {/* MENU BUTTONS */}
-        <div className="col-md-3 p-1">
+        <div className="col-md-3 p-1 animate__animated animate__backInLeft animate__slow animate__delay-1s">
           <div className="btn-group custom-menu">
             <button className="cta-button nes-btn my-3" onClick={handleHomeClick}>
               Home
@@ -97,7 +98,7 @@ function Game() {
         </div>
 
         {/* Crafting UI */}
-        <div className="col-md-6">
+        <div className="col-md-6 animate__animated animate__zoomIn animate__slow animate__delay-2s">
           <Crafting
             selectedItemSlot1={selectedItemSlot1}
             selectedItemSlot2={selectedItemSlot2}
@@ -105,11 +106,13 @@ function Game() {
             setItems={setItems}
             resetSlots={resetSlots}
             itemMapping={itemMapping}
+            setSelectedItemSlot1={setSelectedItemSlot1} // Pass the functions as props
+            setSelectedItemSlot2={setSelectedItemSlot2} // Pass the functions as props
           />
         </div>
 
         {/* INVENTORY */}
-        <div className="col-md-3" style={{ backgroundImage: 'url("./assets/background/framebg.png")', backgroundSize: '100% 100%', paddingTop: '40px', paddingBottom: '50px' }}>
+        <div className="col-md-3 animate__animated animate__backInRight animate__slow animate__delay-3s" style={{ backgroundImage: 'url("./assets/background/framebg.png")', backgroundSize: '100% 100%', paddingTop: '40px', paddingBottom: '50px' }}>
           <div className="scrollable-container">
             <div className="row py-4">
               {items.map((item, index) => (
