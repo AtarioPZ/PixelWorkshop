@@ -17,7 +17,7 @@ function Game() {
 
 
   const [showSettingsOverlay, setShowSettingsOverlay] = useState(false);  
-  const [isMusicEnabled, setIsMusicEnabled] = useState(false); // Start with music disabled
+  const [isMusicEnabled, setIsMusicEnabled] = useState(false);
   const [musicVolume, setMusicVolume] = useState(50);
 
   const handleItemSelect = (item) => {
@@ -37,8 +37,7 @@ function Game() {
     setShowConfirmation(true);
   };
 
-  const confirmGoHome = () => {
-    // Redirect to the home page or take any other action
+  const confirmGoHome = () => {    
     setShowConfirmation(false);
   };
 
@@ -66,7 +65,7 @@ function Game() {
   const [isLoading, setIsLoading] = useState(true);
   
   useEffect(() => {
-    // Simulate loading for 3 seconds (adjust the duration as needed)
+    // Simulate loading for 3 seconds
     const loadingTimeout = setTimeout(() => {
       setIsLoading(false);
     }, 1500);
@@ -134,7 +133,7 @@ function Game() {
                     />
                     <p className='title'>{itemsData.find(data => data.name === item).realName}</p>
                     
-                    {/* Add a custom box for the item description */}
+                    {/* Custom box for the item description */}
                     <div className="custom-box">
                       <img
                         src={`/assets/sprites/items/${itemMapping[item]}`}

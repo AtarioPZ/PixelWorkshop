@@ -6,12 +6,12 @@ const elements = [
   { name: 'earth', image: '/assets/sprites/items/earth.png' },
   { name: 'wind', image: '/assets/sprites/items/wind.png' },
 ];
-const elementWidth = 100; // Adjust the width based on your design
-const containerWidth = elements.length * elementWidth; // Calculate the container width
-const chances = 3; // Number of chances the player gets
+const elementWidth = 100;
+const containerWidth = elements.length * elementWidth;
+const chances = 3;
 
 function MiniGame({ onCraftingSuccess, onCraftingFailure }) {
-  const [targetElement, setTargetElement] = useState(elements[0]); // Initialize with the first element
+  const [targetElement, setTargetElement] = useState(elements[0]); 
   const [ballPosition, setBallPosition] = useState(0);
   const [chancesLeft, setChancesLeft] = useState(chances);
 
@@ -53,7 +53,7 @@ function MiniGame({ onCraftingSuccess, onCraftingFailure }) {
           ? 0
           : prevPosition + elementWidth
       );
-    }, 1000 / elements.length); // Adjust the animation speed
+    }, 1000 / elements.length); // Animation speed
 
     return () => {
       clearInterval(interval);
@@ -78,8 +78,8 @@ function MiniGame({ onCraftingSuccess, onCraftingFailure }) {
                 backgroundImage: `url(${element.image})`,
                 backgroundSize: '100% 100%',
                 transition: 'transform 0.5s ease',              
-                zIndex: element.name === targetElement.name ? 1 : 'auto', // Ensure the ball is on top of the target element
-                position: 'relative', // Ensure pseudo-element positioning works
+                zIndex: element.name === targetElement.name ? 1 : 'auto',
+                position: 'relative',
               }}
             >
               {/* Transparent pseudo-element overlay for hitbox */}
@@ -106,10 +106,10 @@ function MiniGame({ onCraftingSuccess, onCraftingFailure }) {
               backgroundColor: 'red',
               borderRadius: '50%',
               position: 'absolute',
-              top: '50%', // Vertical positioning remains the same
-              transition: 'left 2s linear', // Adjust the transition duration and use 'linear' timing function for a smooth movement
-              animation: 'moveBall 2s linear infinite', // Add animation for looping back-and-forth movement
-              animationDirection: 'alternate', // Make the animation alternate direction
+              top: '50%',
+              transition: 'left 2s linear',
+              animation: 'moveBall 2s linear infinite',
+              animationDirection: 'alternate',
             }}
           />
         </div>      

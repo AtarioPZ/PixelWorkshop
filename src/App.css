@@ -159,10 +159,10 @@
 }
 
 .minigame-title {
-  background-color: #212529; /* NES container title background color */
-  color: #ffffff; /* NES container title text color */
-  padding: 4px 8px; /* Adjust padding as needed */
-  border-radius: 10px; /* Rounded corners on the top */
+  background-color: #212529;
+  color: #ffffff;
+  padding: 4px 8px;
+  border-radius: 10px;
   position: absolute;
   top: 0;
   left: 0;

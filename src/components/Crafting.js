@@ -107,7 +107,7 @@ function Crafting({ selectedItemSlot1, selectedItemSlot2, items, setItems, reset
         <div className="d-flex flex-column py-5">
           {/* Display the selected items in the Crafting component */}
           <div className="crafting-elements py-5">
-            <div className="nes-container rounded-4 slot" onClick={() => handleSlotClick(1)}> {/* Add onClick handler */}
+            <div className="nes-container rounded-4 slot" onClick={() => handleSlotClick(1)}>
               {selectedItemSlot1 ? (
                 <div className='nes-cursorbtn'>
                   <img
@@ -129,7 +129,7 @@ function Crafting({ selectedItemSlot1, selectedItemSlot2, items, setItems, reset
                 height={"50px"}
               />
             </div>
-            <div className="nes-container rounded-4 slot" onClick={() => handleSlotClick(2)}> {/* Add onClick handler */}
+            <div className="nes-container rounded-4 slot" onClick={() => handleSlotClick(2)}>
               {selectedItemSlot2 ? (
                 <div className='nes-cursorbtn'>
                   <img
