@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Crafting from '../Crafting';
 import itemMapping from '../itemMapping';
+import itemsData from '../itemData';
 import { PacmanLoader } from "react-spinners";
 import AudioPlayer from '../AudioPlayer'; 
 
@@ -113,13 +114,16 @@ function Game() {
         </div>
 
         {/* INVENTORY */}
-        <div className="col-md-3" style={{ backgroundImage: 'url("./assets/background/framebg.png")', backgroundSize: '100% 100%', paddingTop: '40px', paddingBottom: '50px' }}>
+        <div className="col-md-3" style={{ backgroundImage: 'url("./assets/background/framebg.png")', backgroundSize: '100% 100%', paddingTop: '40px', paddingBottom: '50px' }}>          
+        <div className='title' style={{ textAlign: 'center' }}>
+          <h3 style={{ margin: '0' }}>I N V E N T O R Y</h3>
+        </div>
           <div className="scrollable-container">
             <div className="row py-4">
               {items.map((item, index) => (
-                <div className="col" key={index}>
+                <div className="col nes-cursorbtn" key={index}>
                   <div
-                    className="container my-4 item-list-item is-pointer"
+                    className="container my-4 item-list-item"
                     onClick={() => handleItemSelect(item)}
                   >
                     <img
@@ -128,6 +132,19 @@ function Game() {
                       width={"100px"}
                       height={"100px"}
                     />
+                    <p className='title'>{itemsData.find(data => data.name === item).realName}</p>
+                    
+                    {/* Add a custom box for the item description */}
+                    <div className="custom-box">
+                      <img
+                        src={`/assets/sprites/items/${itemMapping[item]}`}
+                        alt={item}
+                        width={"100px"}
+                        height={"100px"}
+                      />
+                      
+                      {itemsData.find(data => data.name === item).description}
+                    </div>
                   </div>
                 </div>
               ))}

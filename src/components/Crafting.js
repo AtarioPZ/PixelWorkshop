@@ -109,12 +109,14 @@ function Crafting({ selectedItemSlot1, selectedItemSlot2, items, setItems, reset
           <div className="crafting-elements py-5">
             <div className="nes-container rounded-4 slot" onClick={() => handleSlotClick(1)}> {/* Add onClick handler */}
               {selectedItemSlot1 ? (
-                <img
+                <div className='nes-cursorbtn'>
+                  <img
                   src={`/assets/sprites/items/${itemMapping[selectedItemSlot1]}`}
                   alt={selectedItemSlot1}
                   width={"100px"}
                   height={"100px"}
-                />
+                  />
+                </div>
               ) : (
                 <div className="crafting-slot">Slot 1</div>
               )}
@@ -129,12 +131,14 @@ function Crafting({ selectedItemSlot1, selectedItemSlot2, items, setItems, reset
             </div>
             <div className="nes-container rounded-4 slot" onClick={() => handleSlotClick(2)}> {/* Add onClick handler */}
               {selectedItemSlot2 ? (
-                <img
+                <div className='nes-cursorbtn'>
+                  <img
                   src={`/assets/sprites/items/${itemMapping[selectedItemSlot2]}`}
                   alt={selectedItemSlot2}
                   width={"100px"}
                   height={"100px"}
-                />
+                  />
+                </div>                
               ) : (
                 <div className="crafting-slot">Slot 2</div>
               )}
@@ -142,7 +146,7 @@ function Crafting({ selectedItemSlot1, selectedItemSlot2, items, setItems, reset
           </div>
 
           {/* Craft button */}
-          <button className="nes-btn mt-2" onClick={handleCrafting}>
+          <button className="nes-btn mt-2 nes-cursorbtn" onClick={handleCrafting}>
             Craft
           </button>
 

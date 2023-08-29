@@ -25,6 +25,7 @@
 .custom-menu .cta-button {
   max-width: 200px;
   width: 100%;
+  cursor: url('/public/assets/sprites/cursor-click.png'), auto;
 }
 
 .modal-overlay {
@@ -149,29 +150,41 @@
 }
 
 .minigame-container {
-  background-color: white;
+  background-color: #343a41;
+  color: #ffffff;
   border-radius: 5px;
   padding: 20px;
   text-align: center;
   position: relative;
 }
 
+.minigame-title {
+  background-color: #212529; /* NES container title background color */
+  color: #ffffff; /* NES container title text color */
+  padding: 4px 8px; /* Adjust padding as needed */
+  border-radius: 10px; /* Rounded corners on the top */
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+
 .elements-container {
-  display: flex; /* Display elements horizontally */
-  overflow-x: auto; /* Add a horizontal scrollbar if elements overflow */
-  width: auto; /* Remove the fixed width to fit elements snugly */
-  height: 120px; /* Set a fixed height for the container */
+  display: flex;
+  overflow-x: auto;
+  width: auto;
+  height: 120px;
 }
 
 .element-button {
-  background-color: #50e855;
+  background-color: #8dbe8e;
   color: white;
   border: none;
   padding: 10px 20px;
   cursor: pointer;
-  /* Use flex-grow to make buttons expand and fill available space */
   flex-grow: 1;
-  margin: 0; /* Remove margin to eliminate white spaces */
+  margin: 0;
 }
 
 .ball {
@@ -190,9 +203,31 @@
     left: 0;
   }
   50% {
-    left: 100%; /* Move the ball to the right end */
+    left: 100%;
   }
   100% {
-    left: 0; /* Move the ball back to the left end */
+    left: 0;
   }
+}
+
+/* ITEM DATA */
+.custom-box {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  width: 100%;
+  height: auto;
+  display: none; /* Initially hide the box */  
+}
+
+.item-list-item:hover .custom-box {
+  display: block; /* Show the box when hovering over the item */
+}
+
+.nes-cursorbtn {
+  cursor: url('/public/assets/sprites/cursor-click.png'), auto;
 }
