@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import craftingRecipes from './CraftingRecipes';
+import React, { useState, useEffect } from 'react';
+
 import MiniGame from './minigame';
 
-function Crafting({ selectedItemSlot1, selectedItemSlot2, items, setItems, resetSlots, itemMapping, setSelectedItemSlot1, setSelectedItemSlot2 }) {  
+function Crafting({ selectedItemSlot1, selectedItemSlot2, items, setItems, resetSlots, itemMapping, setSelectedItemSlot1, setSelectedItemSlot2, onCraftingStart, onCraftingEnd, }) {  
   const arraysEqual = (a, b) => {
     return JSON.stringify(a) === JSON.stringify(b);
   };
@@ -11,6 +11,7 @@ function Crafting({ selectedItemSlot1, selectedItemSlot2, items, setItems, reset
   const [selectedRecipe, setSelectedRecipe] = useState(null);
   const [craftingFailed, setCraftingFailed] = useState(false);
   const [combinationNotFound, setCombinationNotFound] = useState(false);
+  const [craftingRecipes, setCraftingRecipes] = useState([]);
 
   const handleCrafting = () => {
     if (selectedItemSlot1 && selectedItemSlot2) {
@@ -32,6 +33,9 @@ function Crafting({ selectedItemSlot1, selectedItemSlot2, items, setItems, reset
       // If recipe does not exist, show modal
       if (!craftingSuccess) {
         setCombinationNotFound(true);
+      } else {
+        // Notify the parent component (Game) that crafting has started
+        onCraftingStart();
       }
     }
   };
@@ -49,6 +53,7 @@ function Crafting({ selectedItemSlot1, selectedItemSlot2, items, setItems, reset
   const handleMiniGameFailure = () => {    
     setIsMiniGameActive(false);
     setCraftingFailed(true);
+    onCraftingEnd(false);
   };
 
   const handleMiniGameSuccess = () => {
@@ -65,6 +70,7 @@ function Crafting({ selectedItemSlot1, selectedItemSlot2, items, setItems, reset
 
     // Deactivate the mini-game
     setIsMiniGameActive(false);
+    onCraftingEnd(true);
   };
 
   const closeModal = () => {    
@@ -73,6 +79,19 @@ function Crafting({ selectedItemSlot1, selectedItemSlot2, items, setItems, reset
     setCraftingFailed(false);
     setCombinationNotFound(false);
   };
+
+  useEffect(() => {
+    // Make a fetch request to your API endpoint for crafting recipes
+    fetch('https://pixelapi-fsg7.onrender.com/api/recipe')
+      .then((response) => response.json())
+      .then((data) => {
+        // Set the fetched crafting recipes to the state variable
+        setCraftingRecipes(data);
+      })
+      .catch((error) => {
+        console.error('Error fetching crafting recipes:', error);
+      });
+  }, []);
 
   return (
     <div className="crafting-container">
@@ -103,7 +122,7 @@ function Crafting({ selectedItemSlot1, selectedItemSlot2, items, setItems, reset
       )}
 
       {/* Crafting components */}
-      <div className="nes-container rounded-4 p-3" style={{ backgroundImage: 'url("./assets/background/ybg.jpg")', backgroundSize: '100% 100%' }}>
+      <div className="nes-container rounded-4 p-3" style={{ backgroundImage: 'url("./assets/background/ybg.jpg")', backgroundSize: '100% 100%', boxShadow: '0 0 10px rgba(0, 0, 0, 0.9)' }}>
         <div className="d-flex flex-column py-5">
           {/* Display the selected items in the Crafting component */}
           <div className="crafting-elements py-5">

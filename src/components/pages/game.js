@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Crafting from '../Crafting';
 import itemMapping from '../itemMapping';
-import itemsData from '../itemData';
 import { PacmanLoader } from "react-spinners";
 import AudioPlayer from '../AudioPlayer'; 
 
-function Game() {  
+function Game() {
+  const [apiData, setApiData] = useState([]);
+  const [isMiniGameActive, setIsMiniGameActive] = useState(false);
+
   const [items, setItems] = useState(['Item 1', 'Item 2', 'Item 3', 'Item 4']);
   
   const [selectedItemSlot1, setSelectedItemSlot1] = useState(null);
@@ -63,6 +65,19 @@ function Game() {
   
 
   const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Make a fetch request to your API endpoint
+    fetch('https://pixelapi-fsg7.onrender.com/api/itemsData')
+      .then((response) => response.json())
+      .then((data) => {
+        // Set the fetched data to the state variable
+        setApiData(data);
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+      });
+  }, []);
   
   useEffect(() => {
     // Simulate loading for 3 seconds
@@ -99,7 +114,7 @@ function Game() {
         </div>
 
         {/* Crafting UI */}
-        <div className="col-md-6 ">
+        <div className="col-md-6">
           <Crafting
             selectedItemSlot1={selectedItemSlot1}
             selectedItemSlot2={selectedItemSlot2}
@@ -109,47 +124,60 @@ function Game() {
             itemMapping={itemMapping}
             setSelectedItemSlot1={setSelectedItemSlot1}
             setSelectedItemSlot2={setSelectedItemSlot2}
+            // Pass isMiniGameActive and functions to handle it
+            isMiniGameActive={isMiniGameActive}
+            onCraftingStart={() => setIsMiniGameActive(true)}
+            onCraftingEnd={(success) => setIsMiniGameActive(false)}
           />
         </div>
 
-        {/* INVENTORY */}
+        {/* INVENTORY */}        
         <div className="col-md-3" style={{ backgroundImage: 'url("./assets/background/framebg.png")', backgroundSize: '100% 100%', paddingTop: '40px', paddingBottom: '50px' }}>          
-        <div className='title' style={{ textAlign: 'center' }}>
-          <h3 style={{ margin: '0' }}>I N V E N T O R Y</h3>
-        </div>
+          <div className='title' style={{ textAlign: 'center' }}>
+            <h3 style={{ margin: '0' }}>I N V E N T O R Y</h3>
+          </div>
           <div className="scrollable-container">
             <div className="row py-4">
-              {items.map((item, index) => (
-                <div className="col nes-cursorbtn" key={index}>
-                  <div
-                    className="container my-4 item-list-item"
-                    onClick={() => handleItemSelect(item)}
-                  >
-                    <img
-                      src={`/assets/sprites/items/${itemMapping[item]}`}
-                      alt={item}
-                      width={"100px"}
-                      height={"100px"}
-                    />
-                    <p className='title'>{itemsData.find(data => data.name === item).realName}</p>
-                    
-                    {/* Custom box for the item description */}
-                    <div className="custom-box">
-                      <img
-                        src={`/assets/sprites/items/${itemMapping[item]}`}
-                        alt={item}
-                        width={"100px"}
-                        height={"100px"}
-                      />
-                      
-                      {itemsData.find(data => data.name === item).description}
+              {isMiniGameActive ? ( // Check if the crafting is active
+                <p className="text-center">Crafting in progress...</p>
+              ) : (
+                // If not crafting, display initial inventory items
+                items.map((itemName, index) => {
+                  const itemData = apiData.find(item => item.name === itemName); // Find the item data from the API
+                  
+                  return (
+                    <div className="col nes-cursorbtn" key={index}>
+                      <div
+                        className="container my-4 item-list-item"
+                        onClick={() => handleItemSelect(itemName)}
+                      >
+                        <img
+                          src={`/assets/sprites/items/${itemMapping[itemName]}`}
+                          alt={itemName}
+                          width={"100px"}
+                          height={"100px"}
+                        />
+                        <p className='title'>{itemData.realName}</p>
+                        
+                        {/* Custom box for the item description */}
+                        <div className="custom-box">
+                          <img
+                            src={`/assets/sprites/items/${itemMapping[itemName]}`}
+                            alt={itemName}
+                            width={"100px"}
+                            height={"100px"}
+                          />
+                          {itemData ? itemData.description : 'Description not available'} {/* Display the fetched description or a placeholder */}
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </div>
-              ))}
+                  );
+                })
+              )}
             </div>
           </div>
         </div>
+
       </div>
 
       {/* Display loading spinner when isLoading is true */}
