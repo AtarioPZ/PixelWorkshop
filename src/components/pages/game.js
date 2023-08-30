@@ -157,7 +157,7 @@ function Game() {
                           width={"100px"}
                           height={"100px"}
                         />
-                        <p className='title'>{itemData.realName}</p>
+                        <p className='title'>{itemData ? itemData.realName : 'Unknown'}</p>
                         
                         {/* Custom box for the item description */}
                         <div className="custom-box">
