@@ -7,7 +7,8 @@ function Header() {
       <h1 className="title">Retro Pixel Workshop</h1>
       <nav className="nav">
         <Link to="/" className="nav-link">Home</Link>
-        <Link to="/playnow" className="nav-link">Play Now</Link>        
+        <Link to="/playnow" className="nav-link">Play Now</Link>
+        <a href="https://api-pixelworkshop.vercel.app/" className="nav-link" target="_blank" rel="noreferrer">API</a>
       </nav>
     </header>
   );
