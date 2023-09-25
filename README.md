@@ -2,8 +2,9 @@
 
 Welcome to Pixel Workshop, a fun crafting game where you can combine different elements to create exciting new items! Combine two elements or items to create exciting new items. Unleash your power to craft various new items and read their goofy personalities.
 
-![SS](https://github.com/AtarioPZ/PixelWorkshop/assets/87065323/21f101cc-016e-48d9-a400-63bbc0235a54
-) 
+![SS](https://github.com/AtarioPZ/PixelWorkshop/assets/87065323/d058aea7-8974-4f68-9a38-a753eac44358)
+
+
 ## Live Demo
 
 Check out the live demo of Pixel Workshop: [Play Now](https://pixel-workshop.vercel.app/)
