@@ -5,11 +5,11 @@ Welcome to Pixel Workshop, a fun crafting game where you can combine different e
 ![SS](https://github.com/AtarioPZ/PixelWorkshop/assets/87065323/d058aea7-8974-4f68-9a38-a753eac44358)
 
 ## Table of Contents
-- [Live Demo](https://github.com/AtarioPZ/PixelWorkshop/edit/master/README.md#live-demo)
-- How to Play
-- Features
-- Technologies Used
-- [Troubleshoot Problems](https://github.com/AtarioPZ/PixelWorkshop/edit/master/README.md#troubleshoot-problems)
+- [Live Demo](https://github.com/AtarioPZ/PixelWorkshop#live-demo)
+- [How to Play](https://github.com/AtarioPZ/PixelWorkshop#how-to-play)
+- [Features](https://github.com/AtarioPZ/PixelWorkshop#features)
+- [Technologies Used](https://github.com/AtarioPZ/PixelWorkshop#technologies-used)
+- [Troubleshoot Problems](https://github.com/AtarioPZ/PixelWorkshop#troubleshoot-problems)
 
 ## Live Demo
 
